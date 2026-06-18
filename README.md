@@ -29,7 +29,7 @@ I wanted a simple way to manage member information without having to manually ed
 
 The Python script helps with importing data from spreadsheets, while the website provides an easier way to browse and manage member records.
 
-#Problems
+##Problems
 Now the thing is the convert.py does auto download photos and renames them but it has to be a google drive link (which is public) the reason for this
 being it is much easier to collect data as a google form rather than individually (just a personal preferance).
 
