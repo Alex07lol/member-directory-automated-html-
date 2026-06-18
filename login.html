@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Demo Organization</title>
+    <style>
+         :root {
+            --ink: #172126;
+            --muted: #5e6b70;
+            --line: #d9e1de;
+            --paper: #f6f7f3;
+            --surface: #ffffff;
+            --green: #12624f;
+            --green-deep: #0b3f35;
+            --gold: #b98b2f;
+        }
+        
+        body {
+            margin: 0;
+            color: var(--ink);
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+            background: var(--paper);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100svh;
+        }
+        
+        .login-container {
+            width: min(400px, calc(100% - 32px));
+            padding: 40px;
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(23, 33, 38, 0.05);
+        }
+        
+        .brand {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+        
+        .brand svg {
+            width: 56px;
+            height: 56px;
+        }
+        
+        h1 {
+            margin: 0;
+            font-family: Georgia, serif;
+            font-size: 1.6rem;
+            color: var(--green-deep);
+        }
+        
+        .field {
+            margin-bottom: 20px;
+        }
+        
+        .field label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--green);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        .field input,
+        .field select {
+            width: 100%;
+            min-height: 48px;
+            padding: 0 14px;
+            border: 1px solid #cbd7d3;
+            border-radius: 6px;
+            background: #fbfcf9;
+            font-size: 1rem;
+            color: var(--ink);
+        }
+        
+        .field input:focus,
+        .field select:focus {
+            outline: 2px solid var(--gold);
+            outline-offset: -1px;
+        }
+        
+        .button {
+            width: 100%;
+            min-height: 48px;
+            margin-top: 10px;
+            background: var(--green-deep);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        
+        .button:hover {
+            background: var(--green);
+        }
+        
+        .error-message {
+            color: #d93025;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="brand">
+            <svg viewBox="0 0 64 64">
+                <circle cx="32" cy="32" r="30" fill="#0b3f35"></circle>
+                <circle cx="32" cy="32" r="24" fill="none" stroke="#b98b2f" stroke-width="2"></circle>
+                <path d="M32 16v30M22 46h20M25 22h14" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"></path>
+                <path d="M20 27l-7 12h14L20 27Zm24 0-7 12h14L44 27Z" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"></path>
+                <path d="M20 27h24" fill="none" stroke="#b98b2f" stroke-width="2.4" stroke-linecap="round"></path>
+            </svg>
+            <h1>Secure Login</h1>
+        </div>
+
+        <div id="error-msg" class="error-message">Invalid credentials. Please try again.</div>
+
+        <form id="login-form">
+            <div class="field">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="field">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="button">Log In</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async(e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const submitBtn = document.querySelector('.button');
+            const errorMsg = document.getElementById('error-msg');
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Logging in...';
+            errorMsg.style.display = 'none';
+
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username,
+                        password
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem('authToken', data.token);
+                    localStorage.setItem('userRole', data.role);
+                    window.location.href = '/directory.html';
+                } else {
+                    errorMsg.style.display = 'block';
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Log In';
+                }
+            } catch (error) {
+                errorMsg.textContent = 'Network error. Please try again.';
+                errorMsg.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Log In';
+            }
+        });
+    </script>
+</body>
+
+</html>

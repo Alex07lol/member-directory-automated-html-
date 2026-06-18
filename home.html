@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Official home page of Demo Organization, a professional forum for members.">
+    <meta property="og:title" content="Demo Organization">
+    <meta property="og:description" content="A professional forum for members.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/hero-bg.jpg">
+    <title>Home | Demo Organization</title>
+    <style>
+         :root {
+            --ink: #172126;
+            --muted: #5e6b70;
+            --line: #d9e1de;
+            --paper: #f6f7f3;
+            --green: #12624f;
+            --green-deep: #0b3f35;
+            --gold: #b98b2f;
+            --blue: #315d77;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            color: var(--ink);
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: var(--paper);
+            line-height: 1.6;
+        }
+        
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        img {
+            display: block;
+            max-width: 100%;
+        }
+        
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid rgba(217, 225, 222, 0.9);
+            background: rgba(246, 247, 243, 0.92);
+            backdrop-filter: blur(14px);
+        }
+        
+        .nav {
+            width: min(1140px, calc(100% - 32px));
+            min-height: 76px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            min-width: 0;
+            font-weight: 800;
+            letter-spacing: 0;
+        }
+        
+        .brand-mark {
+            width: 48px;
+            height: 48px;
+            flex: 0 0 auto;
+        }
+        
+        .brand-text {
+            display: grid;
+            line-height: 1.15;
+        }
+        
+        .brand-text span:first-child {
+            font-size: clamp(1rem, 2vw, 1.18rem);
+        }
+        
+        .brand-text span:last-child {
+            color: var(--muted);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #334247;
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+        
+        .nav-links a {
+            padding: 10px 12px;
+            border-radius: 6px;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a[aria-current="page"] {
+            background: #e7ece8;
+        }
+        
+        .nav-links a:focus-visible,
+        .brand:focus-visible,
+        .button:focus-visible,
+        .footer a:focus-visible {
+            outline: 3px solid rgba(185, 139, 47, 0.75);
+            outline-offset: 4px;
+        }
+        
+        .nav-links a:focus-visible {
+            background: #e7ece8;
+        }
+        
+        .hero {
+            min-height: calc(100svh - 76px);
+            display: grid;
+            align-items: end;
+            background: linear-gradient(90deg, rgba(7, 35, 31, 0.78), rgba(7, 35, 31, 0.3) 48%, rgba(246, 247, 243, 0.1)), url("assets/hero-bg.jpg") center / cover no-repeat;
+        }
+        
+        .hero-inner {
+            width: min(1140px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 84px 0 72px;
+            color: #ffffff;
+        }
+        
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 0 18px;
+            font-size: 0.82rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+        
+        .eyebrow::before {
+            width: 38px;
+            height: 2px;
+            content: "";
+            background: var(--gold);
+        }
+        
+        h1 {
+            max-width: 820px;
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(2.6rem, 8vw, 6.4rem);
+            line-height: 0.95;
+            letter-spacing: 0;
+            text-wrap: balance;
+        }
+        
+        .hero-copy {
+            max-width: 650px;
+            margin: 26px 0 0;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: clamp(1rem, 2vw, 1.22rem);
+        }
+        
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 30px;
+        }
+        
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 46px;
+            padding: 0 18px;
+            border: 1px solid rgba(255, 255, 255, 0.58);
+            border-radius: 6px;
+            font-weight: 800;
+            transition: background 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
+        }
+        
+        .button:hover {
+            transform: translateY(-1px);
+        }
+        
+        .button-primary {
+            border-color: #ffffff;
+            color: var(--green-deep);
+            background: #ffffff;
+        }
+        
+        .button-secondary {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .button-secondary:hover {
+            background: rgba(255, 255, 255, 0.16);
+        }
+        
+        main {
+            overflow: hidden;
+        }
+        
+        .section {
+            width: min(1140px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 84px 0;
+        }
+        
+        .intro {
+            max-width: 820px;
+        }
+        
+        .section-label {
+            margin: 0 0 12px;
+            color: var(--green);
+            font-size: 0.82rem;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+        
+        h2 {
+            margin: 0 0 20px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(2rem, 4vw, 3.4rem);
+            line-height: 1.06;
+            letter-spacing: 0;
+            text-wrap: balance;
+        }
+        
+        p {
+            margin: 0;
+            color: var(--muted);
+        }
+        
+        p+p {
+            margin-top: 16px;
+        }
+        
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 34px;
+        }
+        
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .support-item {
+            min-height: 168px;
+            padding: 24px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.56);
+            opacity: 0;
+        }
+        
+        .support-item.is-visible {
+            animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        
+        .support-item:nth-child(1).is-visible {
+            animation-delay: 0.5s;
+        }
+        
+        .support-item:nth-child(2).is-visible {
+            animation-delay: 0.6s;
+        }
+        
+        .support-item:nth-child(3).is-visible {
+            animation-delay: 0.8s;
+        }
+        
+        .support-item h3 {
+            margin: 0 0 10px;
+            color: var(--green-deep);
+            font-size: 1rem;
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            .support-item {
+                opacity: 1;
+                animation: none !important;
+            }
+        }
+        
+        .cta {
+            max-width: 520px;
+            margin: 0 auto;
+            padding: 34px;
+            border-radius: 8px;
+            text-align: center;
+            color: #ffffff;
+            background: linear-gradient(135deg, var(--green-deep), var(--blue));
+        }
+        
+        .cta h2 {
+            margin-bottom: 10px;
+            font-size: clamp(1.8rem, 3vw, 2.8rem);
+        }
+        
+        .cta p {
+            color: rgba(255, 255, 255, 0.86);
+        }
+        
+        .contact-details {
+            display: grid;
+            gap: 8px;
+            margin: 18px 0 22px;
+            font-weight: 700;
+        }
+        
+        .contact-details a,
+        .contact-details span {
+            color: #ffffff;
+        }
+        
+        .cta-actions {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+        
+        .map-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 54px;
+            height: 54px;
+            border-radius: 6px;
+            transition: background 160ms ease, transform 160ms ease;
+        }
+        
+        .map-link:hover,
+        .map-link:focus-visible {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-1px);
+        }
+        
+        .map-link:focus-visible {
+            outline: 3px solid rgba(255, 255, 255, 0.78);
+            outline-offset: 4px;
+        }
+        
+        .map-link img {
+            width: 42px;
+            height: 42px;
+        }
+        
+        .phone-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 54px;
+            height: 54px;
+            border-radius: 6px;
+            color: #ffffff;
+            transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+        }
+        
+        .phone-link:hover,
+        .phone-link:focus-visible {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-1px);
+        }
+        
+        .phone-link:focus-visible {
+            outline: 3px solid rgba(255, 255, 255, 0.78);
+            outline-offset: 4px;
+        }
+        
+        .phone-link img {
+            width: 42px;
+            height: 42px;
+        }
+        
+        .footer {
+            padding: 30px 0;
+            color: #d6dfdc;
+            background: #152522;
+        }
+        
+        .footer-inner {
+            width: min(1140px, calc(100% - 32px));
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 18px;
+            font-size: 0.94rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        
+        .footer a {
+            color: #ffffff;
+            font-weight: 700;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 800px) {
+            .nav {
+                min-height: auto;
+                padding: 14px 0;
+                align-items: flex-start;
+                flex-direction: column;
+            }
+            .nav-links {
+                width: 100%;
+                overflow-x: auto;
+                padding-bottom: 2px;
+            }
+            .hero {
+                min-height: 620px;
+                background-position: 58% center;
+            }
+            .hero-inner {
+                padding: 92px 0 50px;
+            }
+            .section {
+                padding: 58px 0;
+            }
+            .support-grid {
+                grid-template-columns: 1fr;
+            }
+            .cta {
+                padding: 28px 22px;
+            }
+            .footer-inner {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <nav class="nav" aria-label="Primary navigation">
+            <a class="brand" href="#top" aria-label="Demo Organization home">
+                <svg class="brand-mark" viewBox="0 0 64 64" role="img" aria-label="Organization logo">
+                    <circle cx="32" cy="32" r="30" fill="#0b3f35"></circle>
+                    <circle cx="32" cy="32" r="24" fill="none" stroke="#b98b2f" stroke-width="2"></circle>
+                    <path d="M32 16v30M22 46h20M25 22h14" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"></path>
+                    <path d="M20 27l-7 12h14L20 27Zm24 0-7 12h14L44 27Z" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"></path>
+                    <path d="M20 27h24" fill="none" stroke="#b98b2f" stroke-width="2.4" stroke-linecap="round"></path>
+                </svg>
+                <span class="brand-text">
+                    <span>Demo</span>
+                <span>Organization</span>
+                </span>
+            </a>
+            <div class="nav-links">
+                <a href="#top" aria-current="page">Home</a>
+                <a href="directory.html">Directory</a>
+                <a href="#contact">Contact</a>
+                <a href="login.html">Login</a>
+            </div>
+        </nav>
+    </header>
+    <main id="top">
+        <section class="hero" aria-label="Demo Organization building">
+            <div class="hero-inner">
+                <p class="eyebrow">About the association</p>
+                <h1>Demo Organization</h1>
+                <p class="hero-copy">
+                    A professional forum for members, committed to dignity in practice and the welfare of the community.
+                </p>
+                <div class="hero-actions" aria-label="Primary actions">
+                    <a class="button button-primary" href="directory.html">View Directory</a>
+                    <a class="button button-secondary" href="#contact">Contact Us</a>
+                </div>
+            </div>
+        </section>
+        <section class="section intro" id="about">
+            <div>
+                <p class="section-label">Our identity</p>
+                <h2>A respected community.</h2>
+                <p>
+                    The organization brings together professionals connected with the institution. The association supports professional fellowship, ethical practices, continuing engagement, and coordinated service to the public.
+                </p>
+                <p>
+                    Through collective leadership and active member participation, the association works to strengthen the standards of practice while preserving the collegial spirit that defines the local community.
+                </p>
+            </div>
+            <div class="support-grid" aria-label="Association focus areas">
+                <article class="support-item">
+                    <h3>Member Directory</h3>
+                    <p>Quick access to member profiles and contact information for the local community.</p>
+                </article>
+                <article class="support-item">
+                    <h3>Professional Fellowship</h3>
+                    <p>A shared forum for coordination, collegial support, and responsible practice.</p>
+                </article>
+                <article class="support-item">
+                    <h3>Public Access</h3>
+                    <p>Clear ways for visitors and members to find the association and reach the office.</p>
+                </article>
+            </div>
+        </section>
+        <section class="section" id="contact">
+            <div class="cta">
+                <div>
+                    <h2>Contact Us</h2>
+                    <p>Reach the association office or open the location map for directions.</p>
+                    <div class="contact-details">
+                        <span>Demo Organization</span>
+                        <a href="tel:+919876543210">+91 98765 43210</a>
+                    </div>
+                    <div class="cta-actions">
+                        <a class="map-link" href="https://maps.app.goo.gl/Q5m3K5igTyZoz13M9" target="_blank" rel="noopener" aria-label="Open location in Google Maps">
+                            <img src="assets/location.png" alt="">
+                        </a>
+
+                        <a class="phone-link" href="tel:+919876543210" aria-label="Call us">
+                            <img src="assets/phone.png" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <span>Demo Organization</span>
+            <div class="footer-links" aria-label="Footer navigation">
+                <a href="directory.html">Directory</a>
+                <a href="#contact">Contact</a>
+                <a href="https://maps.app.goo.gl/Q5m3K5igTyZoz13M9" target="_blank" rel="noopener">Location</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.15
+            });
+
+            document.querySelectorAll('.support-item').forEach(item => observer.observe(item));
+
+            const token = localStorage.getItem('authToken');
+            const loginLink = document.querySelector('a[href="login.html"]');
+            if (token && loginLink) {
+                loginLink.textContent = 'Logout';
+                loginLink.href = '#';
+                loginLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    localStorage.removeItem('authToken');
+                    window.location.reload();
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
